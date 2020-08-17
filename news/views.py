@@ -17,7 +17,7 @@ class IndexView(View):
         return render(request, self.template_name)
 
 
-class NewsView(View):
+class NewsDetailView(View):
     template_name = "news/news.html"
 
     def get(self, request, *args, **kwargs):
