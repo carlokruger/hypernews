@@ -18,7 +18,7 @@ class IndexView(View):
 
 
 class NewsDetailView(View):
-    template_name = "news/news.html"
+    template_name = "news/newsdetail.html"
 
     def get(self, request, *args, **kwargs):
         global news
