@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.views import View
 import json
 from hypernews.settings import NEWS_JSON_PATH
+import datetime
 
 # Create your views here.
 
@@ -28,3 +29,20 @@ class NewsDetailView(View):
         link = news[0]["link"]
         vars = {"title": title, "created": created, "text": text, "link": link }
         return render(request, self.template_name, vars)
+
+
+class NewsView(View):
+    template_name = "news/news.html"
+
+    def get(self, request, *args, **kwargs):
+        global news
+        dates = []
+        url_titles = []
+        for datum in news:
+            url_titles.append([datum["created"][:10], datum["link"], datum["title"]])
+            if datum["created"][:10] not in dates:
+                dates.append(datum["created"][:10])
+        dates.sort(reverse=True)
+
+        context = {"dates": dates, "data": url_titles}
+        return render(request, self.template_name, context)
