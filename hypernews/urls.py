@@ -24,7 +24,7 @@ urlpatterns = [
     path('', IndexView.as_view()),
     re_path(r'^news/[0-9]+', NewsDetailView.as_view()),
     path('news/', NewsView.as_view()),
-    path('news', RedirectView.as_view(url='/news/')),
-    path('news/create', CreateArticleView.as_view()),
-    path('news/create/', RedirectView.as_view(url='/news/create')),
+    path('news', RedirectView.as_view(url='news/')),
+    path('news/create/', CreateArticleView.as_view()),
+    path('news/create', RedirectView.as_view(url='/news/create/'))
 ]

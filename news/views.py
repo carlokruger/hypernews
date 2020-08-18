@@ -79,6 +79,6 @@ class CreateArticleView(View):
         new_record = {"created": created, "text": text, "title": title, "link": new_id}
         json_data.append(new_record)
         with open(NEWS_JSON_PATH, 'w') as json_db:  # clobber
-            json.dump(json_data, json_db)
+            json.dump(json_data, json_db, indent=4)
 
         return redirect('/news/')
