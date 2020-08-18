@@ -10,11 +10,9 @@
 <h4>{{date}}</h4>
 <ul>
 {% for item in data %}
-
 {% if item.0 == date %}
 <p><li><a target="_blank" href="/news/{{item.1}}/">{{item.2}}</a></li></p>
 {% endif %}
-
 {% endfor %}
 </ul>
 {% endfor %}

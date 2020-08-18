@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, re_path
-from news.views import IndexView, NewsDetailView, NewsView
+from news.views import IndexView, NewsDetailView, NewsView, CreateArticleView
 from django.views.generic import RedirectView
 
 
@@ -23,6 +23,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', IndexView.as_view()),
     re_path(r'^news/[0-9]+', NewsDetailView.as_view()),
-    path('news', NewsView.as_view()),
-    path('news/', RedirectView.as_view(url='/news'))
+    path('news/', NewsView.as_view()),
+    path('news', RedirectView.as_view(url='/news/')),
+    path('news/create', CreateArticleView.as_view()),
+    path('news/create/', RedirectView.as_view(url='/news/create')),
 ]
