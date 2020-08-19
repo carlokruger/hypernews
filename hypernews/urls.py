@@ -17,14 +17,18 @@ from django.contrib import admin
 from django.urls import path, re_path
 from news.views import IndexView, NewsDetailView, NewsView, CreateArticleView
 from django.views.generic import RedirectView
+from django.conf.urls.static import static
+from hypernews.settings import STATIC_URL
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', IndexView.as_view()),
+    path('', RedirectView.as_view(url='news/')),
     re_path(r'^news/[0-9]+', NewsDetailView.as_view()),
     path('news/', NewsView.as_view()),
     path('news', RedirectView.as_view(url='news/')),
     path('news/create/', CreateArticleView.as_view()),
     path('news/create', RedirectView.as_view(url='/news/create/'))
 ]
+
+urlpatterns += static(STATIC_URL)

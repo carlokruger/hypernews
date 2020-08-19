@@ -54,13 +54,24 @@ class NewsView(View):
             news = json.load(json_db)
         dates = []
         url_titles = []
-        for datum in news:
-            url_titles.append([datum["created"][:10], datum["link"], datum["title"]])
-            if datum["created"][:10] not in dates:
-                dates.append(datum["created"][:10])
-        dates.sort(reverse=True)
+        if request.GET.get('q') is None:
+            for datum in news:
+                url_titles.append([datum["created"][:10], datum["link"], datum["title"]])
+                if datum["created"][:10] not in dates:
+                    dates.append(datum["created"][:10])
+            dates.sort(reverse=True)
 
-        context = {"dates": dates, "data": url_titles}
+            context = {"dates": dates, "data": url_titles}
+        else:
+            for item in news:
+                if request.GET['q'] in item["title"]:
+                    url_titles.append([item["created"][:10], item["link"], item["title"]])
+                    if item["created"][:10] not in dates:
+                        dates.append(item["created"][:10])
+                dates.sort(reverse=True)
+
+                context = {"dates": dates, "data": url_titles}
+
         return render(request, self.template_name, context)
 
 

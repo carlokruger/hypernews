@@ -2,6 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
     <title>Hypernews</title>
 </head>
 <body>
@@ -17,5 +19,12 @@
 </ul>
 {% endfor %}
 <a target="_blank" href="/news/create/">Create</a>
+
+<form action="/news/" method="get">
+        {% csrf_token %}
+        <label for="q">Search terms</label><br>
+        <input type="text" name="q" id="q"><br><br>
+        <input type="submit" value="Search">
+    </form>
 </body>
 </html>
